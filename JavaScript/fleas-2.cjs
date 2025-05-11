@@ -22,6 +22,8 @@ let N, M, S, T, Q;
 let doska = [];
 let fleas = [];
 let lineCount = 0;
+let kostil = false; //Чтобы считать есть ли совпдающие клетки
+let i = 0;
 rl.on("line", (line) => {
   if (N === undefined) {
     [N, M, S, T, Q] = line.split(" ").map(Number);
@@ -31,10 +33,16 @@ rl.on("line", (line) => {
     // doska[S][T] = 1;
   } else {
     let [a, b] = line.split(" ").map(Number);
-    fleas.push([a, b]);
-
+    a -= 1;
+    b -= 1;
+    kostil = S === a && T === b;
+    // console.log(N, M, a, b);
+    if (N > a && M > b) {
+      fleas.push([a, b]);
+    }
+    i++;
     // Когда все Q строк считаны
-    if (fleas.length > Q) {
+    if (i >= Q) {
       processInput();
     }
   }
@@ -86,15 +94,43 @@ function processInput() {
   // Даем немного времени асинхронным вызовам завершиться
   setTimeout(() => {
     doska[S][T] = 0;
+
     let sum = 0;
-    doska.forEach((i) => {
-      i.forEach((j) => process.stdout.write(j + " "));
-      console.log(" ");
-    });
+    if (Q > 0) {
+      for (let i = 0; i < fleas.length; i++) {
+        const [x, y] = [fleas[i][0], fleas[i][1]];
+
+        function isSameCoord(a, b) {
+          return a[0] === b[0] && a[1] === b[1];
+        }
+
+        // console.log(x !== S, y !== T, doska[x][y] === 0);
+        // if ((x !== S || y !== T) && doska[x][y] === 0) {
+        if (!isSameCoord([x, y], [S, T]) && doska[x][y] === 0) {
+          // console.log(doska[x][y]);
+          sum = 0;
+          break;
+        } else {
+          sum += doska[x][y];
+        }
+      }
+      // fleas.forEach((pos) => {
+      //   const chislo = doska[pos[0]][pos[1]];
+      //   if (chislo === 0) {
+      //     sum = 0;
+      //     throw;
+      //   } else {
+      //     sum += chislo;
+      //   }
+      // });
+    }
+
+    console.log(kostil ? sum : sum ? sum : -1);
+
     // doska.forEach((i) => {
-    //   i.forEach((j) => (sum += j));
+    //   i.forEach((j) => process.stdout.write(j + " "));
+    //   console.log(" ");
     // });
-    // console.log(sum);
     rl.close(); // закрываем интерфейс после вывода
-  }, 50); // можно увеличить задержку, если нужно больше итераций
+  }, 150); //500 для ОЧЕНЬ больших переборов // можно увеличить задержку, если нужно больше итераций
 }
