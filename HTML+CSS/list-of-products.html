@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Задание - https://coderun.yandex.ru/problem/list-of-products/description -->
+    <main>
+        <h2>Список товаров</h2>
+        <ul>
+            <li>
+                <img/>
+                <button>Купить</button>
+            </li>
+            <li>
+                <img/>
+                <button>Купить</button>
+            </li>
+            <li>
+                <img/>
+                <button>Купить</button>
+            </li>
+        </ul>
+    </main>
+    <style>
+        main{
+            height: 100vh;
+            width: 100vw;
+            padding: 16px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+        h2{
+            margin: 0 0 16px;
+            font-size: 18px;
+        }
+        ul{
+            width: 100%;
+            height: 100%;
+            max-height: 221px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 16px
+        }
+        li{
+            max-width: 149px;
+            max-height: 189px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px;
+            background-color: #F8F8F8;
+            border-radius: 24px;
+            font-size: 12px;
+        }
+        img{
+            max-width: 149px;
+            max-height: 138px;
+            width: 100%;
+            height: 100%;
+            background-color: #C4C4C4;
+            border-radius: 16px;
+        }
+        button{
+            max-width: 149px;
+            max-height: 35px;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border: none;
+            background-color: white;
+            padding: 0;
+        }
+
+    </style>
+</body>
+</html>
